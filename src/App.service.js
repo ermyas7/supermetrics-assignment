@@ -34,13 +34,20 @@ const averageCharLength = (arr) => {
     return (sum / arr.length);
 }
 
+const averagePostNum = (groupedPost) => {
+    let sum = 0;
+    Object.keys(groupedPost).forEach((key) => {
+        sum += groupedPost[key].length;
+    })
+
+    return sum/Object.keys(groupedPost).length;
+}
 const getBigPostByChar = (posts) => {
 
     let biggestPost = posts[0];
     posts.forEach((element) => {
         if(element.message.length > biggestPost.message.length){
             biggestPost = element;
-            console.log(element.message.length);
         }
     });
     return biggestPost;
@@ -77,7 +84,7 @@ export const averagePostPerUserPerMonth = (posts) => {
     const groupedPostByUserAndMonth = {};
     Object.keys(groupedPostByUser)
     .forEach((key) => {
-        groupedPostByUserAndMonth[key] = groupByKey(groupedPostByUser[key], 'month')
+        groupedPostByUserAndMonth[key] = averagePostNum(groupByKey(groupedPostByUser[key], 'month'));
     });
 
     return groupedPostByUserAndMonth;

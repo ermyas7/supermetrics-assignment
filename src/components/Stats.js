@@ -33,11 +33,28 @@ const Stats = () => {
         return Object.entries(totalPostNumber(enhancedPost, 'week'));
     }, [enhancedPost]);
 
+    const averagePostByUser = useMemo(() =>{
+        return Object.entries(averagePostPerUserPerMonth(enhancedPost));
+    }, [enhancedPost])
+
+    console.log('------------------------------------------------')
+    console.log('Average character length of posts per month')
+    console.log(averageCharLengthByMonthEntity);
+    console.log('------------------------------------------------')
+    console.log('Longest post by character length per month')
+    console.log(LongestPostPerCharByMonth);
+    console.log('------------------------------------------------')
+    console.log('Total posts split by week number')
+    console.log(postEntityByWeekNumber);
+    console.log('------------------------------------------------')
+    console.log('Average number of posts per user per month')
+    console.log(averagePostByUser);
     if(posts.length === 0) return null;
     return(
         <div className="supermetrics-stats">
             <h2 className="supermetrics-heading">Stats</h2>
             <br/>
+            <h3>Please check the log from the developer tool to see the detail data</h3>
             <hr/>
             <br/>
             <h3>Average character length of posts per month </h3>
@@ -75,6 +92,24 @@ const Stats = () => {
                  })
              }  
              <br/>
+
+             <br/>
+            <hr/>
+            <br/>
+            <h3>Average number of posts per user per month </h3>
+            <br/>
+             {
+                 averagePostByUser.map(([userId, postNo]) => {
+                     return (
+                        <p key={userId}>{`${userId} have ${postNo} posts per month Avg`}</p> 
+                     )
+                 })
+             }  
+             <br/>
+
+            <br/>
+            <hr/>
+            <br/>
 
         </div>
     )

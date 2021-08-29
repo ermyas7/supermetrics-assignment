@@ -9,7 +9,7 @@ const AppProvider = ({children}) => {
     const [ error, setError ] = useState('');
     const [posts, setPosts] = useState([]);
     const [nextPage, setNextPage] = useState(1);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const localToken = window.localStorage.getItem('sl_token');
