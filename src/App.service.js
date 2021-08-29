@@ -10,6 +10,7 @@ export const doHttp = async (url, params) => {
         const responseBody = await response.json();
         return {data: responseBody.data};
     } catch (error) {
+        console.log(error);
         return {error: error.message}
     }
 }
