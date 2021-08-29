@@ -1,4 +1,3 @@
-// const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 export const doHttp = async (url, params) => {
     try {
         const response = await fetch(
@@ -73,3 +72,13 @@ export const totalPostNumber = (posts, key) => {
     return totalPostByWeek;
 }
 
+export const averagePostPerUserPerMonth = (posts) => {
+    const groupedPostByUser = groupByKey(posts, 'from_id');
+    const groupedPostByUserAndMonth = {};
+    Object.keys(groupedPostByUser)
+    .forEach((key) => {
+        groupedPostByUserAndMonth[key] = groupByKey(groupedPostByUser[key], 'month')
+    });
+
+    return groupedPostByUserAndMonth;
+}
