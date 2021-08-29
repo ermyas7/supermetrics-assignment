@@ -29,6 +29,10 @@ const Stats = () => {
         return Object.entries(getLongestPostByChar(enhancedPost, 'month'));
     }, [enhancedPost]);
 
+    const postEntityByWeekNumber = useMemo(() => {
+        return Object.entries(totalPostNumber(enhancedPost, 'week'));
+    }, [enhancedPost]);
+
     if(posts.length === 0) return null;
     return(
         <div className="supermetrics-stats">
@@ -56,6 +60,18 @@ const Stats = () => {
                          <p>{`${key} ------ ${value.message}`}</p>
                          <br/>
                      </Fragment>
+                 })
+             }  
+             <br/>
+
+             <br/>
+            <hr/>
+            <br/>
+            <h3>Total posts split by week number </h3>
+            <br/>
+             {
+                 postEntityByWeekNumber.map(([key, value]) => {
+                     return <p key={key}>{`week no - ${key} ------ number of posts - ${value}`}</p>
                  })
              }  
              <br/>
