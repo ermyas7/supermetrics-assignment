@@ -30,7 +30,7 @@
   padding: .3rem 1rem;
   width: 50%;
   margin-bottom: 2rem;
-  border: none;
+  border: 1px #000 solid;
   font-size: inherit;
 }
 
