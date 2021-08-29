@@ -2,7 +2,7 @@ import { useContext, useMemo } from "react";
 import { AppContext } from "../App.context";
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
-import { getAvaregePostLengthByKey } from '../App.service';
+import { getAvaregePostLengthByKey, getLongestPostByChar } from '../App.service';
 
 // extend dayjs to support .week 
 dayjs.extend(isoWeek)
@@ -19,7 +19,7 @@ const Stats = () => {
         })
     }, [posts]);
 
-    console.log(getAvaregePostLengthByKey(enhancedPost, 'month'));
+    console.log(getLongestPostByChar(enhancedPost, 'month'));
     return(
         <div className="supermetrics-stats">
             <h2 className="supermetrics-heading">Stats</h2>

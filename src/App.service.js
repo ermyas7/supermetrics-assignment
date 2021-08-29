@@ -1,3 +1,4 @@
+// const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 export const doHttp = async (url, params) => {
     try {
         const response = await fetch(
@@ -34,12 +35,32 @@ const averageCharLength = (arr) => {
     return (sum / arr.length);
 }
 
-export const getAvaregePostLengthByKey = (arr, key) => {
-    const arrayGroupedObj = groupByKey(arr, key);
+const getBigPostByChar = (posts) => {
+
+    let biggestPost = posts[0];
+    posts.forEach((element) => {
+        if(element.message.length > biggestPost.message.length){
+            biggestPost = element;
+            console.log(element.message.length);
+        }
+    });
+    return biggestPost;
+}
+export const getAvaregePostLengthByKey = (posts, key) => {
+    const arrayGroupedObj = groupByKey(posts, key);
     const result = {};
     Object.keys(arrayGroupedObj).forEach((key) => {
         result[key] = averageCharLength(arrayGroupedObj[key]);
     });
     return result;
+}
+
+export const getLongestPostByChar = (posts, key) => {
+    const groupedPosts = groupByKey(posts, key);
+    const bigPostByMonth = {};
+    Object.keys(groupedPosts).forEach((key) => {
+        bigPostByMonth[key] = getBigPostByChar(groupedPosts[key]);
+    });
+    return bigPostByMonth;
 }
 
