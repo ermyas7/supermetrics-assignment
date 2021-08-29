@@ -1,6 +1,6 @@
 # supermetrics-assignmen
 
-Install the dependencies.
+How to run.
 
 ```sh
 git clone https://github.com/ermyas7/supermetrics-assignment
