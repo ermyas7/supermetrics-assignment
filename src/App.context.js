@@ -29,7 +29,6 @@ const AppProvider = ({children}) => {
             }
         },[nextPage, token]);
     useEffect(() => {
-        console.log(nextPage);
         if(token && nextPage <= 10){
             getPosts();
         }

@@ -11,6 +11,7 @@ dayjs.extend(isoWeek)
 const Stats = () => {
     const {posts} = useContext(AppContext);
     const enhancedPost = useMemo(() => {
+        if(posts.length === 0) return [];
         return posts.map((post) => {
             return {
                 ...post,
@@ -20,11 +21,26 @@ const Stats = () => {
         })
     }, [posts]);
 
-    console.log(averagePostPerUserPerMonth(enhancedPost));
-    
+    const averageCharLengthByMonthEntity = useMemo(() => {
+        return Object.entries(getAvaregePostLengthByKey(enhancedPost, 'month'));
+    }, [enhancedPost]);
+
+    if(posts.length === 0) return null;
     return(
         <div className="supermetrics-stats">
             <h2 className="supermetrics-heading">Stats</h2>
+            <br/>
+            <hr/>
+            <br/>
+            <h3>Average character length of posts per month </h3>
+            <br/>
+             {
+                 averageCharLengthByMonthEntity.map(([key, value]) => {
+                     return <p key={key}>{`${key} ------ ${value}`}</p>
+                 })
+             }  
+             <br/>
+
         </div>
     )
 };
