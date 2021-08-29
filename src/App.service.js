@@ -64,3 +64,12 @@ export const getLongestPostByChar = (posts, key) => {
     return bigPostByMonth;
 }
 
+export const totalPostNumber = (posts, key) => {
+    const groupedPostsByWeek = groupByKey(posts, key);
+    const totalPostByWeek = {};
+    Object.keys(groupedPostsByWeek).forEach((key) => {
+        totalPostByWeek[key] = groupedPostsByWeek[key].length;
+    });
+    return totalPostByWeek;
+}
+
