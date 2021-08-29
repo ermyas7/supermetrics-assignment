@@ -1,4 +1,4 @@
-import { useContext, useMemo } from "react";
+import { Fragment, useContext, useMemo } from "react";
 import { AppContext } from "../App.context";
 import dayjs from 'dayjs';
 import isoWeek from 'dayjs/plugin/isoWeek';
@@ -25,6 +25,10 @@ const Stats = () => {
         return Object.entries(getAvaregePostLengthByKey(enhancedPost, 'month'));
     }, [enhancedPost]);
 
+    const LongestPostPerCharByMonth = useMemo(() => {
+        return Object.entries(getLongestPostByChar(enhancedPost, 'month'));
+    }, [enhancedPost]);
+
     if(posts.length === 0) return null;
     return(
         <div className="supermetrics-stats">
@@ -37,6 +41,21 @@ const Stats = () => {
              {
                  averageCharLengthByMonthEntity.map(([key, value]) => {
                      return <p key={key}>{`${key} ------ ${value}`}</p>
+                 })
+             }  
+             <br/>
+
+            <br/>
+            <hr/>
+            <br/>
+            <h3>Longest post by character length per month </h3>
+            <br/>
+             {
+                 LongestPostPerCharByMonth.map(([key, value]) => {
+                     return <Fragment key={key}>
+                         <p>{`${key} ------ ${value.message}`}</p>
+                         <br/>
+                     </Fragment>
                  })
              }  
              <br/>
