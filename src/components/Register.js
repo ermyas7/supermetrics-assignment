@@ -15,9 +15,8 @@ const Register = () => {
                 client_id: CLIENT_TOKEN
             })
         };
-
         const { data } = await doHttp(REGISTER_URL, params);
-        console.log(data);
+        window.localStorage.setItem('sl_token', data.sl_token);
     }, [inputs.email, inputs.name]);
 
     return(
