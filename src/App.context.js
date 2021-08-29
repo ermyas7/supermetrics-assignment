@@ -9,6 +9,7 @@ const AppProvider = ({children}) => {
     const [ error, setError ] = useState('');
     const [posts, setPosts] = useState([]);
     const [nextPage, setNextPage] = useState(1);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const localToken = window.localStorage.getItem('sl_token');
@@ -16,12 +17,15 @@ const AppProvider = ({children}) => {
     }, []);
 
     const getPosts = useCallback(async () => {
+            setLoading(true);
             const {data, error} = await doHttp(`${POSTS_URL}?sl_token=${token}&page=${nextPage}`, {method: 'get'});
             if(error){
                 setError(error);
+                setLoading(false);
             }else{
                 setPosts((oldPost) => [...oldPost, ...data.posts]);
                 setNextPage(data.page + 1);
+                if(data.page === 10) setLoading(false);
             }
         },[nextPage, token]);
     useEffect(() => {
@@ -29,7 +33,7 @@ const AppProvider = ({children}) => {
         if(token && nextPage <= 10){
             getPosts();
         }
-    }, [nextPage, token]);
+    }, [getPosts, nextPage, token]);
 
     return(
         <AppContext.Provider value={{
@@ -37,7 +41,8 @@ const AppProvider = ({children}) => {
             setToken,
             error,
             setError,
-            posts
+            posts,
+            loading
         }}>
             {children}
         </AppContext.Provider>        

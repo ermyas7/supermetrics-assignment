@@ -22,8 +22,8 @@ const Register = () => {
             setError(error);
         }else{
             setError('');
-            setToken(data?.sl_token);
-            window.localStorage.setItem('sl_token', data?.sl_token);
+            setToken(data.sl_token);
+            window.localStorage.setItem('sl_token', data.sl_token);
         }
     }, [inputs.email, inputs.name, setError, setToken]);
 
