@@ -5,7 +5,7 @@ export const useForm = (initialData = {}) => {
 
     const changeHandler = (evt) => {
         const { value, name } = evt.target;
-        console.log(value, name);
+        setInputs({...inputs, name: value});
     }
 
     return {

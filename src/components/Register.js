@@ -2,6 +2,7 @@ import { useForm } from '../hooks';
 
 const Register = () => {
     const { inputs, changeHandler } = useForm();
+    console.log(inputs);
     return(
         <div className="supermetrics-register">
             <h2 className="supermetrics-heading supermetrics-heading-secondary">Register Token</h2>
