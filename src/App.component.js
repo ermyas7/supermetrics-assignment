@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="supermetrics">
         <h1>Supermetrics API</h1>
-        {loading && <p>Loading...</p>}
+        {loading && token && <p>Loading...</p>}
         {error && <Error /> }
         {registerTokenRequired && <Register/>}
         {!registerTokenRequired && !loading && <Stats />}
