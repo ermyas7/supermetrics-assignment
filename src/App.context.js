@@ -14,7 +14,8 @@ const AppProvider = ({children}) => {
     useEffect(() => {
         const localToken = window.localStorage.getItem('sl_token');
         setToken(localToken);
-    }, []);
+        if(!token) setLoading(false);
+    }, [token]);
 
     const getPosts = useCallback(async () => {
             setLoading(true);
